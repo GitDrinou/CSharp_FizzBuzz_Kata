@@ -20,14 +20,49 @@ public class FizzBuzzTest{
             var actual = fizzBuzz.Generate(2);
             Check.That(actual).IsEqualTo("2");
         }
-        
+
+        [Test]
+        public void ShouldReturnFizzWhenGivenNumberIsDivisibleBy3()
+        {
+            var fizzbuzz = new FizzBuzz();
+            var actual = fizzbuzz.Generate(9);
+            Check.That(actual).IsEqualTo("Fizz");
+        }
+
+        [Test]
+        public void ShouldReturnBuzzWhenGivenNumberIsDivisibleBy5()
+        {
+            var fizzbuzz = new FizzBuzz();
+            var actual = fizzbuzz.Generate(25);
+            Check.That(actual).IsEqualTo("Buzz");
+        }
+
+        [Test]
+        public void ShouldReturnFizzBuzzWhenGivenNumberIsDivisibleBy3And5()
+        {
+            var fizzbuzz = new FizzBuzz();
+            var actual = fizzbuzz.Generate(15);
+            Check.That(actual).IsEqualTo("FizzBuzz");
+        }
         
         
         public class FizzBuzz
          {
              public string Generate(int number)
              {
-                 return number.ToString();
+                 var value = "";
+                     
+                 if (number % 3 == 0)
+                 {
+                     value = "Fizz";
+                 }
+
+                 if (number % 5 == 0)
+                 {
+                     value += "Buzz";
+                 }
+
+                 return string.IsNullOrEmpty(value) ? number.ToString() : value;
              }
          }
 }
