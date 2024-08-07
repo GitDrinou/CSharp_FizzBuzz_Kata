@@ -47,22 +47,30 @@ public class FizzBuzzTest{
         
         
         public class FizzBuzz
-         {
-             public string Generate(int number)
+        {
+            Dictionary<int, string> _values = new Dictionary<int, string>
+            {
+                {3, "Fizz"},
+                {5, "Buzz"}
+            };
+            
+
+            public string Generate(int number)
+             { 
+                 var valueToDisplay = "";
+                 foreach ((int modulo, string value) in _values)
+                 {
+                     if (IsDivisibleBy(number,modulo))
+                     {
+                         valueToDisplay += value;
+                     }
+                 }
+                 return string.IsNullOrEmpty(valueToDisplay) ? number.ToString() : valueToDisplay;
+             }
+
+             public static bool IsDivisibleBy(int number, int modulo)
              {
-                 var value = "";
-                     
-                 if (number % 3 == 0)
-                 {
-                     value = "Fizz";
-                 }
-
-                 if (number % 5 == 0)
-                 {
-                     value += "Buzz";
-                 }
-
-                 return string.IsNullOrEmpty(value) ? number.ToString() : value;
+                 return number % modulo == 0;
              }
          }
 }
